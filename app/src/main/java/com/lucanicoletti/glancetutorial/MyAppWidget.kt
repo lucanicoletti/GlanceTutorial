@@ -21,7 +21,25 @@ class MyAppWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
-            Text("Hello World")
+            // this is not the theme your define with MaterialTheme
+            GlanceTheme {
+                Column(
+                    modifier = GlanceModifier.fillMaxSize()
+                        .background(GlanceTheme.colors.background),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(text = "Test question?", modifier = GlanceModifier.padding(12.dp))
+                    Row(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Button(
+                            text = "Answer 1", onClick = actionStartActivity<MainActivity>()
+                        )
+                        Button(
+                            text = "Answer 2", onClick = actionStartActivity<MainActivity>()
+                        )
+                    }
+                }
+            }
         }
     }
 
