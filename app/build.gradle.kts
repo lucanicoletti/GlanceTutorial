@@ -59,6 +59,15 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    // For AppWidgets support
+    implementation(libs.androidx.glance.appwidget)
+
+    // For interop APIs with Material 2
+    implementation(libs.androidx.glance.material)
+
+    // For interop APIs with Material 3
+    implementation(libs.androidx.glance.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
