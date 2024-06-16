@@ -2,7 +2,7 @@
     android:minWidth="40dp"
     android:minHeight="40dp"
     android:updatePeriodMillis="86400000"
-    android:description="description of my widget"
+    android:description="@string/desc"
     android:initialLayout="@layout/glance_default_loading_layout"
     android:configure="com.lucanicoletti.glancetutorial.MainActivity"
     android:resizeMode="horizontal|vertical"
