@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GlanceTutorial</string>
+    <string name="greeting">Hello, %1s!</string>
     <string name="desc">Widget description</string>
 </resources>

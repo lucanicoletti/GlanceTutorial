@@ -2,7 +2,6 @@ package com.lucanicoletti.glancetutorial
 
 import android.content.Context
 import android.content.res.Resources
-import kotlinx.coroutines.delay
 
 class FakeGlanceDataProviderRepository(
     private val resources: Resources
@@ -18,17 +17,15 @@ class FakeGlanceDataProviderRepository(
         }
     }
 
-    suspend fun getUsersName(): String {
-        delay(400)
-        return resources.getString(R.string.app_name)
+    fun getUsersName(): String {
+        return resources.getString(R.string.greeting, "Luca")
     }
 
-    suspend fun getUsersReminders(): List<String> {
-        delay(400)
+    fun getUsersNotes(): List<String> {
         return listOf(
-            "Plan Glance video",
-            "Code Glance project",
-            "Publish Glance video"
+            "Quick note",
+            "A note about anything",
+            "Last note"
         )
     }
 }
