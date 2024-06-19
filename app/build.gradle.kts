@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
+    id("androidx.room")
     id("com.google.dagger.hilt.android")
 }
 
@@ -52,6 +53,9 @@ android {
     kapt {
         correctErrorTypes = true
     }
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -73,6 +77,14 @@ dependencies {
     // For interop APIs with Material 3
     implementation(libs.androidx.glance.material3)
 
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
