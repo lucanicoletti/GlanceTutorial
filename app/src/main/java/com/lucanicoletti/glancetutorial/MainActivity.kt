@@ -32,21 +32,17 @@ import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.lucanicoletti.glancetutorial.db.model.Note
 import com.lucanicoletti.glancetutorial.ui.theme.GlanceTutorialTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -61,15 +57,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val coroutineScope = rememberCoroutineScope()
-            val notes = remember {
-                mutableStateListOf<Note>()
-            }
-            LaunchedEffect(Unit) {
-                notesRepository.getNotes().collectLatest {
-                    notes.clear()
-                    notes.addAll(it)
-                }
-            }
+            val notes = notesRepository.getNotes().collectAsState(initial = emptyList())
             GlanceTutorialTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(), floatingActionButton = {
                     SmallFloatingActionButton(
@@ -91,7 +79,7 @@ class MainActivity : ComponentActivity() {
                             .padding(16.dp),
                         contentPadding = PaddingValues(vertical = 4.dp)
                     ) {
-                        items(notes) { note ->
+                        items(notes.value) { note ->
                             fun deleteNote() = coroutineScope.launch(Dispatchers.IO) {
                                 notesRepository.deleteNote(note)
                             }
