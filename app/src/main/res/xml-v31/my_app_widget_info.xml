@@ -10,6 +10,7 @@
     android:description="@string/widget_description"
     android:previewLayout="@layout/my_widget_placeholder"
     android:initialLayout="@layout/my_widget_placeholder"
+    android:configure="com.lucanicoletti.glancetutorial.MainActivity"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen"
     android:widgetFeatures="reconfigurable|configuration_optional" />
